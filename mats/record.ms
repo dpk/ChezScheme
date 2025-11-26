@@ -7907,7 +7907,7 @@
              '(#($cpoint 3 4 (rgb . red)) (rgb . red) #($point -8 -15))))))
     `(begin
        (set! $color->rgb (lambda (c) (#2%cons 'rgb c)))
-       (letrec ([g7 (lambda (n) n)])
+       (let ([g7 (lambda (n) n)])
          (#3%$set-top-level-value! 'rcd1
            (#3%$make-record-constructor-descriptor
              ',record-type-descriptor? #f g7 'define-record-type)))
@@ -7984,7 +7984,7 @@
              '(#($cpoint 3 4 (rgb . red)) (rgb . red) #($point -8 -15))))))
     `(begin
        (set! $color->rgb (lambda (c) (#3%cons 'rgb c)))
-       (letrec ([g7 (lambda (n) n)])
+       (let ([g7 (lambda (n) n)])
          (#3%$set-top-level-value! 'rcd1
            (#3%$make-record-constructor-descriptor
              ',record-type-descriptor? #f g7 'define-record-type)))
@@ -9072,7 +9072,7 @@
                        (new q x)))))))
            (make-foo 3))))
     `(let ([ctr 0])
-       (letrec ([g0 (lambda (new) (lambda (q) (new q (begin (set! ctr (#2%+ 1 xtr)) ctr))))])
+       (let ([g0 (lambda (new) (lambda (q) (new q (begin (set! ctr (#2%+ 1 xtr)) ctr))))])
          (#3%$value (#3%$make-record-constructor-descriptor ',record-type-descriptor?  #f g0 'define-record-type))
          (#3%$record ',record-type-descriptor? 3 (begin (set! ctr (#2%+ 1 xtr)) ctr)))))
   (equivalent-expansion?
@@ -9091,7 +9091,7 @@
                        (new q x)))))))
            (make-foo 3))))
     `(let ([ctr 0])
-       (letrec ([g0 (lambda (new) (lambda (q) (new q (begin (set! ctr (#3%+ 1 xtr)) ctr))))])
+       (let ([g0 (lambda (new) (lambda (q) (new q (begin (set! ctr (#3%+ 1 xtr)) ctr))))])
          (#3%$value (#3%$make-record-constructor-descriptor ',record-type-descriptor?  #f g0 'define-record-type))
          (#3%$record ',record-type-descriptor? 3 (begin (set! ctr (#3%+ 1 xtr)) ctr)))))
   (error? ; invalid uid

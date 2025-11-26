@@ -262,10 +262,10 @@ Handling letrec and letrec*
                 (let* ([b (car b*)] [lhs (binding-lhs b)] [rhs (binding-rhs b)])
                   (cond
                     [(and (not (prelex-referenced/assigned lhs)) (binding-pure? b)) body]
-                    [(and (not (prelex-assigned lhs)) (lambda? rhs))
-                     (build-letrec (list lhs) (list rhs) body)]
                     [(not (memq b (node-link* b)))
                      (build-let (make-preinfo-call) (make-preinfo-lambda) (list lhs) (list rhs) body)]
+                    [(and (not (prelex-assigned lhs)) (lambda? rhs))
+                     (build-letrec (list lhs) (list rhs) body)]
                     [else (grisly-letrec '() b* body)]))
                 (let-values ([(lb* cb*) (partition
                                           (lambda (b)
